@@ -1,0 +1,58 @@
+<div class="row align-items-center">
+    <div class="col">
+        <h3>Listado de heroes</h3>
+    </div>
+    <div class="col">
+        <button type="button" [routerLink]="['/heroeEdit', 'nuevo']" class="btn btn-primary float-right">
+          <i class="fa fa-plus"></i>
+          Nuevo Heroe
+        </button>
+    </div>
+</div>
+<hr>
+
+<div class="row animated fadeIn fast">
+    <div class="col-md-12">
+
+        <div class="table-responsive">
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Poder</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let k of heroes | keys; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ heroes[k].nombre }}</td>
+                        <td>{{ heroes[k].poder }}</td>
+                        <td>{{ heroes[k].vivo }}</td>
+                        <td>
+                            <button type="button" [routerLink]="['/heroeEdit', k]" class="btn btn-success"><i class="fas fa-user-edit"></i></button> &nbsp;
+                            <button type="button" (click)="borraHeroe(k)" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+            </table>
+
+            <div *ngIf="(heroes | keys).length === 0 && !loading" class="alert alert-info" role="alert">
+                <strong>No hay</strong> registros para mostrar
+            </div>
+
+            <div *ngIf="loading" class="alert alert-warning text-center" role="alert">
+                <strong>Cargando</strong> <br>
+                <i class="fa fa-sync fa-spin fa-2x"></i>
+                <br>
+                <p>Espere por favor</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
